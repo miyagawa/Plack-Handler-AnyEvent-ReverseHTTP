@@ -1,5 +1,8 @@
 package Plack::Server::ReverseHTTP;
 use strict;
+use 5.008_001;
+our $VERSION = '0.01';
+
 use AnyEvent::ReverseHTTP;
 use HTTP::Message::PSGI;
 use HTTP::Response;
@@ -58,6 +61,10 @@ with Rack applications.
 =head1 AUTHOR
 
 Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+
+=head1 LICENSE
+
+This module is licensed under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
