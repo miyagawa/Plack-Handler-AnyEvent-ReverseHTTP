@@ -24,12 +24,34 @@ sub register_service {
         }
 
         $env->{'psgi.nonblocking'}  = Plack::Util::TRUE;
+        $env->{'psgi.streaming'}    = Plack::Util::TRUE;
         $env->{'psgi.multithread'}  = Plack::Util::FALSE;
         $env->{'psgi.multiprocess'} = Plack::Util::FALSE;
         $env->{'psgi.run_once'}     = Plack::Util::FALSE;
 
         my $r = $app->($env);
-        return HTTP::Response->from_psgi($r);
+        if (ref $r eq 'ARRAY') {
+            return HTTP::Response->from_psgi($r);
+        } elsif (ref $r eq 'CODE') {
+            my $cv = AE::cv;
+            $r->(sub {
+                my $r = shift;
+
+                if (defined $r->[2]) {
+                    my $res = HTTP::Response->from_psgi($r);
+                    $cv->send($res);
+                } else {
+                    my $res = HTTP::Response->from_psgi([ $r->[0], $r->[1], [] ]); # dummy
+                    my @body;
+                    return Plack::Util::inline_object
+                        write => sub { push @body, $_[0] },
+                        close => sub { $res->content(join '', @body); $cv->send($res) };
+                }
+            });
+            return $cv;
+        } else {
+            die "Bad response: $r";
+        }
     };
 }
 
