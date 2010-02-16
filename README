@@ -1,14 +1,15 @@
 NAME
-    Plack::Server::ReverseHTTP - reversehttp gateway for PSGI application
+    Plack::Handler::AnyEvent::ReverseHTTP - reversehttp gateway for PSGI
+    application
 
 SYNOPSIS
-      > plackup --server ReverseHTTP --host rhttplabel --token your-token
+      > plackup --server AnyEvent::ReverseHTTP --host rhttplabel --token your-token
 
 DESCRIPTION
-    Plack::Server::ReverseHTTP is a PSGI implementation that uses
-    ReverseHTTP gateway to access your PSGI application on your desktop or
-    behind the firewall from the internet. Just like Ruby's hookout does
-    with Rack applications.
+    Plack::Handler::AnyEvent::ReverseHTTP is Plack handler that runs your
+    PSGI application on AnyEvent::ReverseHTTP. It uses ReverseHTTP gateway
+    to access your PSGI application on your desktop or behind the firewall
+    from the internet. Just like Ruby's hookout does with Rack applications.
 
 AUTHOR
     Tatsuhiko Miyagawa <miyagawa@bulknews.net>

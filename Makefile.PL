@@ -1,9 +1,9 @@
 use inc::Module::Install;
-name 'Plack-Server-ReverseHTTP';
-all_from 'lib/Plack/Server/ReverseHTTP.pm';
-readme_from 'lib/Plack/Server/ReverseHTTP.pm';
+name 'Plack-Handler-AnyEvent-ReverseHTTP';
+all_from 'lib/Plack/Handler/AnyEvent/ReverseHTTP.pm';
+readme_from 'lib/Plack/Handler/AnyEvent/ReverseHTTP.pm';
+requires 'Plack', 0.99;
 requires 'AnyEvent';
-requires 'Plack::Util';
 requires 'HTTP::Message::PSGI';
 requires 'AnyEvent::ReverseHTTP';
 build_requires 'Test::More';
