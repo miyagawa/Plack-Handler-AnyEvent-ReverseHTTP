@@ -1,5 +1,8 @@
 Revision history for Perl extension Plack::Handler::AnyEvent::ReverseHTTP
 
+0.04  Tue Feb 16 00:25:39 PST 2010
+        - Fixed a packaging issue
+
 0.03  Tue Feb 16 00:15:29 PST 2010
         - Renamed dist to Plack::Handler::AnyEvent::ReverseHTTP
 
